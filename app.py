@@ -27,11 +27,13 @@ if st.sidebar.radio('Select model demo',('Tree','K-means')) == 'Tree':
     
 else:
     st.title('K-means demo with make_blobs (2D)')
+    placeholder = st.empty()
     st.sidebar.markdown('# Generate random points')
     nb_points = st.sidebar.slider('Number of points',min_value=0,max_value=1000,value=100, step = 10)
     std = st.sidebar.slider('Standard deviation',min_value=0.05, max_value=3.0, value=1.0, step=0.5)
     nb_clusters = st.sidebar.slider('Number of clusters',min_value=1, max_value=10, value=3, step=1, help='How many zones are the points divided into?')
     if st.sidebar.button('Generate points and run K-means'):
+        placeholder = st.empty()
         points = make_blobs_app(nb_points,nb_clusters,std)[0]
         X = [item[0] for item in points]
         Y = [item[1] for item in points]
@@ -43,3 +45,6 @@ else:
         plt.scatter(X,Y,c=prediction)
         plt.title('K-means labeled datapoints like so')
         st.pyplot()
+    else:
+        placeholder =  st.markdown('# 👈🏻 tune sliders here')
+
